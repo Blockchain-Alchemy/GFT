@@ -14,7 +14,7 @@ Clone this repo and in terminal enter:
 
 This will install required packages
 ### Build from Unity
-Unity project should be built as WebGL and named `public` - the output '/Build/' directory is placed here `/public/Build/`
+Unity project should be built as WebGL and named `public` - the output `/Build/` directory is placed in the `/public/` folder
 This repo contains an example Unity WebGL Component already built and placed in the `/public/Build/`, it shows the basic functionality.
 
 ### Build from node
