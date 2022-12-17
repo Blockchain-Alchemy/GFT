@@ -27,7 +27,7 @@ To create an optimized build that can be deployed, in terminal enter:
 You can now simpley drag-and-drop the `build` folder to deploy to [netlify](https://app.netlify.com/drop).
 
 # Tutorials - Extended Documentation 
-[GFT Tutorials](https://blockchain-alchemy.gitbook.io/gft-gaming-framework-for-tezos/)
+[**GFT Tutorials**](https://blockchain-alchemy.gitbook.io/gft-gaming-framework-for-tezos/)
 
 ![WWXTZ Chart](https://user-images.githubusercontent.com/2120817/208210672-6b6dc30d-625d-4ee5-90c7-6221471f652b.jpg)
 
