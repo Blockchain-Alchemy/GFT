@@ -13,11 +13,11 @@ Clone this repo and in terminal enter:
 `nmp install`
 
 This will install required packages
-### Build from Unity
+#### Build from Unity
 Unity project should be built as WebGL and named `public` - the output '/Build/' directory is placed here `/public/Build/`
 This repo contains an example Unity WebGL Component already built and placed in the `/public/Build/`, it shows the basic functionality.
 
-### Build from node
+#### Build from node
 To create an optimized build that can be deployed in terminal enter:
 
 `npm run build`
@@ -25,9 +25,9 @@ To create an optimized build that can be deployed in terminal enter:
 ### Deploy to Netlify
 You can now simpley drag-and-drop the `build` folder to deploy to [netlify](https://app.netlify.com/drop).
 
-### Tutorials - Extended Documentation 
+# Tutorials - Extended Documentation 
 [GFT Tutorials](https://blockchain-alchemy.gitbook.io/gft-gaming-framework-for-tezos/)
 
 ![WWXTZ Chart](https://user-images.githubusercontent.com/2120817/208210672-6b6dc30d-625d-4ee5-90c7-6221471f652b.jpg)
 
-### Dependencies
+# Dependencies
