@@ -12,9 +12,10 @@ Clone this repo and in terminal enter:
 
 `nmp install`
 
-This will install required packages
+This will install required packages.
 ### Build from Unity
-Unity project should be built as WebGL and named `public` - the output `/Build/` directory is placed in the `/public/` folder
+Unity project should be built as WebGL and named `public` - the output `/Build/` directory is placed in the `/public/` folder.
+
 This repo contains an example Unity WebGL Component already built and placed in the `/public/Build/` folder, it shows the basic functionality.
 
 ### Build from node
