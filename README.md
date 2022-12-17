@@ -8,7 +8,7 @@ This is a robust, flexible and scalable solution that allows game devlopers to t
 ### Setup
 
 
-### Tutorials
+### Tutorials - Extended Documentation 
 https://app.gitbook.com/o/aTWt2obfN1vNq08b4M9B/s/yUex4erISr5ZsVOzvMW6/
 
 
