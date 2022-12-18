@@ -8,7 +8,6 @@ import React, {
 import {
   BeaconEvent,
   defaultEventCallbacks,
-  NetworkType,
   PermissionScope,
 } from '@airgap/beacon-sdk';
 import { BeaconWallet } from '@taquito/beacon-wallet';
