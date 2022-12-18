@@ -5,7 +5,6 @@ import React, {
   useCallback,
   ReactNode,
 } from 'react';
-import { TezosToolkit } from '@taquito/taquito';
 import {
   BeaconEvent,
   defaultEventCallbacks,
@@ -13,6 +12,7 @@ import {
   PermissionScope,
 } from '@airgap/beacon-sdk';
 import { BeaconWallet } from '@taquito/beacon-wallet';
+import { TezosToolkit } from '@taquito/taquito';
 import { WalletContextApi } from './types';
 
 export const WalletContext = createContext<WalletContextApi>(
