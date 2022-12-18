@@ -1,16 +1,20 @@
+import { NetworkType } from '@airgap/beacon-sdk';
 import React, { createContext, useEffect, useState, ReactNode } from 'react';
+import { Networks } from 'configs';
 import { NetworkContextApi } from './types';
-import { DefaultNetwork, Networks } from 'configs';
 
 export const NetworkContext = createContext<NetworkContextApi>(
   {} as NetworkContextApi
 );
 
-export const NetworkProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [networkType, setNetworkType] = useState(DefaultNetwork);
-  const [rpcUrl, setRpcUrl] = useState(Networks[DefaultNetwork].RpcList);
+type Props = {
+  children: ReactNode;
+  value: NetworkType;
+};
+
+export const NetworkProvider: React.FC<Props> = ({ value, children }) => {
+  const [networkType, setNetworkType] = useState(value);
+  const [rpcUrl, setRpcUrl] = useState(Networks[value].RpcList);
 
   useEffect(() => {
     const network = Networks[networkType];

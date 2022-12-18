@@ -1,11 +1,5 @@
 import { NetworkType } from '@airgap/beacon-sdk';
 
-export const BaseUrl = process.env.REACT_APP_API_URL || 'https://grat.fun';
-
-export const Admin = 'tz1bxwduvRwBhq59FmThGKD5ceDFadr57JTq';
-
-export const DefaultNetwork = NetworkType.MAINNET;
-
 type NetworkConfig = {
   [key in NetworkType]?: any;
 };
