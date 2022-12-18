@@ -13,6 +13,7 @@ import {
 } from '@airgap/beacon-sdk';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
+import { useNetwork } from 'contexts/NetworkProvider';
 import { WalletContextApi } from './types';
 
 export const WalletContext = createContext<WalletContextApi>(
@@ -24,14 +25,11 @@ const scopes: PermissionScope[] = [
   PermissionScope.SIGN,
 ];
 
-const RpcUrl = 'https://mainnet.tezos.marigold.dev';
-
 export const WalletProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [tezos, setTezos] = useState(new TezosToolkit(RpcUrl));
-  const [networkType, setNetworkType] = useState(NetworkType.MAINNET);
-  const [rpcUrl, setRpcUrl] = useState(RpcUrl);
+  const { networkType, rpcUrl } = useNetwork();
+  const [tezos, setTezos] = useState(new TezosToolkit(rpcUrl));
   const [wallet, setWallet] = useState<BeaconWallet>();
   const [publicKey, setPublicKey] = useState<string | undefined>(undefined);
   const [address, setAddress] = useState<string | undefined>(undefined);
@@ -113,12 +111,8 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({
         connected,
         publicKey,
         address,
-        rpcUrl,
-        networkType,
         connectWallet,
         disconnectWallet,
-        setNetworkType,
-        setRpcUrl,
       }}
     >
       {children}
