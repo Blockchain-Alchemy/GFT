@@ -28,21 +28,37 @@ const Loader = styled.div`
   font-weight: 500;
 `;
 
-type Props = {
-  subscription?: (unityContext: UnityContextHook) => void;
-  unsubscription?: (unityContext: UnityContextHook) => void;
+export type UnityContext = UnityContextHook;
+
+export type UnityEventListener = {
+  eventName: string;
+  callback: (...parameters: any[]) => any;
 };
 
-const UnityWrapper = ({ subscription, unsubscription }: Props) => {
+type Props = {
+  setUnityContext?: (unityContext: UnityContext) => void;
+  eventListeners?: UnityEventListener[];
+};
+
+const UnityWrapper = ({ setUnityContext, eventListeners }: Props) => {
   const unityContext = useUnityContext(unityConfig);
   const { loadingProgression, isLoaded } = unityContext;
 
   useEffect(() => {
-    subscription && subscription(unityContext);
+    setUnityContext && setUnityContext(unityContext);
+  }, [setUnityContext]);
+
+  useEffect(() => {
+    const { addEventListener, removeEventListener } = unityContext;
+    eventListeners?.map((event: UnityEventListener) => {
+      addEventListener(event.eventName, event.callback);
+    });
     return () => {
-      unsubscription && unsubscription(unityContext);
+      eventListeners?.map((event: UnityEventListener) => {
+        removeEventListener(event.eventName, event.callback);
+      });
     };
-  }, [unityContext, subscription, unsubscription]);
+  }, [unityContext, eventListeners]);
 
   return (
     <UnityContainer>
