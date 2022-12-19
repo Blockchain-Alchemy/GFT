@@ -2,7 +2,11 @@ import React from 'react';
 import Unity from 'components/unity/Unity';
 
 const Home = () => {
-  return <Unity></Unity>;
+  return (
+    <div className="container mx-auto mt-4">
+      <Unity></Unity>
+    </div>
+  );
 };
 
 export default Home;
