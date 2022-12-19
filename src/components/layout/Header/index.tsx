@@ -1,3 +1,5 @@
+import ConnectWallet from 'components/wallet/ConnectButton';
+
 const Header = () => {
   return (
     <nav className="container p-6 mx-auto lg:flex lg:justify-between lg:items-center">
@@ -82,9 +84,7 @@ const Header = () => {
           </a>
         </div>
 
-        <button className="block px-6 py-2.5 mt-4 font-medium leading-5 text-center text-white capitalize bg-blue-600 rounded-lg lg:mt-0 hover:bg-blue-500 lg:w-auto">
-          Get started
-        </button>
+        <ConnectWallet />
       </div>
     </nav>
   );
