@@ -1,4 +1,4 @@
-import { Unity as UnityWebgl, useUnityContext } from 'react-unity-webgl';
+import { Unity, useUnityContext } from 'react-unity-webgl';
 import styled from 'styled-components';
 
 const unityConfig = {
@@ -26,13 +26,13 @@ const Loader = styled.div`
   font-weight: 500;
 `;
 
-const Unity = () => {
+const UnityWrapper = () => {
   const unityContext = useUnityContext(unityConfig);
   const { loadingProgression, isLoaded } = unityContext;
 
   return (
     <UnityContainer>
-      <UnityWebgl
+      <Unity
         unityProvider={unityContext.unityProvider}
         style={{
           height: 540,
@@ -49,4 +49,4 @@ const Unity = () => {
   );
 };
 
-export default Unity;
+export default UnityWrapper;
