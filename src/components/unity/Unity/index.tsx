@@ -1,14 +1,7 @@
-import { useEffect } from 'react';
-import { Unity, useUnityContext } from 'react-unity-webgl';
+import { CSSProperties, useEffect } from 'react';
+import { Unity, UnityConfig, useUnityContext } from 'react-unity-webgl';
 import { UnityContextHook } from 'react-unity-webgl/distribution/types/unity-context-hook';
 import styled from 'styled-components';
-
-const unityConfig = {
-  loaderUrl: 'Build/public.loader.js',
-  dataUrl: 'Build/public.data.unityweb',
-  frameworkUrl: 'Build/public.framework.js.unityweb',
-  codeUrl: 'Build/public.wasm.unityweb',
-};
 
 const UnityContainer = styled.div`
   display: flex;
@@ -35,12 +28,19 @@ export type UnityEventListener = {
   callback: (...parameters: any[]) => any;
 };
 
-type Props = {
+type UnityProps = {
+  unityConfig: UnityConfig;
   setUnityContext?: (unityContext: UnityContext) => void;
   eventListeners?: UnityEventListener[];
+  styles?: CSSProperties;
 };
 
-const UnityWrapper = ({ setUnityContext, eventListeners }: Props) => {
+const UnityWrapper = ({
+  unityConfig,
+  setUnityContext,
+  eventListeners,
+  styles,
+}: UnityProps) => {
   const unityContext = useUnityContext(unityConfig);
   const { loadingProgression, isLoaded } = unityContext;
 
@@ -62,14 +62,7 @@ const UnityWrapper = ({ setUnityContext, eventListeners }: Props) => {
 
   return (
     <UnityContainer>
-      <Unity
-        unityProvider={unityContext.unityProvider}
-        style={{
-          height: 540,
-          width: 950,
-          background: '#555',
-        }}
-      />
+      <Unity unityProvider={unityContext.unityProvider} style={styles} />
       {!isLoaded && loadingProgression > 0 && (
         <Loader>
           <div>Loading... {Math.round(loadingProgression * 100)}%</div>

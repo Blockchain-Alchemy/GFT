@@ -4,6 +4,13 @@ import Unity, {
   UnityEventListener,
 } from 'components/unity/Unity';
 
+const unityConfig = {
+  loaderUrl: 'Build/public.loader.js',
+  dataUrl: 'Build/public.data.unityweb',
+  frameworkUrl: 'Build/public.framework.js.unityweb',
+  codeUrl: 'Build/public.wasm.unityweb',
+};
+
 const Home = () => {
   const [unityContext, setUnityContext] = useState<UnityContext | null>(null);
   console.log('unityContext', unityContext);
@@ -26,8 +33,14 @@ const Home = () => {
   return (
     <div className="container mx-auto mt-4">
       <Unity
+        unityConfig={unityConfig}
         eventListeners={eventListeners}
         setUnityContext={setUnityContext}
+        styles={{
+          height: 540,
+          width: 950,
+          background: '#555',
+        }}
       ></Unity>
     </div>
   );
