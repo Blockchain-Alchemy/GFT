@@ -1,8 +1,9 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Unity, {
   UnityContext,
   UnityEventListener,
 } from 'components/unity/Unity';
+import { useWallet } from 'contexts/WalletProvider';
 
 const unityConfig = {
   loaderUrl: 'Build/public.loader.js',
@@ -12,13 +13,23 @@ const unityConfig = {
 };
 
 const Home = () => {
+  const { address } = useWallet();
   const [unityContext, setUnityContext] = useState<UnityContext | null>(null);
   console.log('unityContext', unityContext);
 
+  // Send wallet connected state to unity.
+  useEffect(() => {
+    if (unityContext) {
+      unityContext.sendMessage('GameManager', 'WalletConnected', !!address);
+    }
+  }, [unityContext, address]);
+
+  // Event Listener for starting game
   const onStartGame = useCallback(() => {
     console.log('Start');
   }, []);
 
+  // Event Listener for ending game
   const onEndGame = useCallback(() => {
     console.log('End');
   }, []);

@@ -46,15 +46,15 @@ const UnityWrapper = ({
 
   useEffect(() => {
     setUnityContext && setUnityContext(unityContext);
-  }, [setUnityContext]);
+  }, [unityContext, setUnityContext]);
 
   useEffect(() => {
     const { addEventListener, removeEventListener } = unityContext;
-    eventListeners?.map((event: UnityEventListener) => {
+    eventListeners?.forEach((event: UnityEventListener) => {
       addEventListener(event.eventName, event.callback);
     });
     return () => {
-      eventListeners?.map((event: UnityEventListener) => {
+      eventListeners?.forEach((event: UnityEventListener) => {
         removeEventListener(event.eventName, event.callback);
       });
     };
