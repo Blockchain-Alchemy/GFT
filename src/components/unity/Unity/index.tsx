@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Unity, useUnityContext } from 'react-unity-webgl';
+import { UnityContextHook } from 'react-unity-webgl/distribution/types/unity-context-hook';
 import styled from 'styled-components';
 
 const unityConfig = {
@@ -26,9 +28,21 @@ const Loader = styled.div`
   font-weight: 500;
 `;
 
-const UnityWrapper = () => {
+type Props = {
+  subscription?: (unityContext: UnityContextHook) => void;
+  unsubscription?: (unityContext: UnityContextHook) => void;
+};
+
+const UnityWrapper = ({ subscription, unsubscription }: Props) => {
   const unityContext = useUnityContext(unityConfig);
   const { loadingProgression, isLoaded } = unityContext;
+
+  useEffect(() => {
+    subscription && subscription(unityContext);
+    return () => {
+      unsubscription && unsubscription(unityContext);
+    };
+  }, [unityContext, subscription, unsubscription]);
 
   return (
     <UnityContainer>
