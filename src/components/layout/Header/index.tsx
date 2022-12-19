@@ -1,6 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
 const Header = () => {
   return (
     <nav className="container p-6 mx-auto lg:flex lg:justify-between lg:items-center">
@@ -8,7 +5,7 @@ const Header = () => {
         <div>
           <a
             className="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
-            href="#"
+            href="/"
           >
             Brand
           </a>
@@ -61,25 +58,25 @@ const Header = () => {
         <div className="flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:-px-8 lg:space-y-0">
           <a
             className="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
-            href="#"
+            href="/"
           >
             Home
           </a>
           <a
             className="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
-            href="#"
+            href="/components"
           >
             Components
           </a>
           <a
             className="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
-            href="#"
+            href="/pricing"
           >
             Pricing
           </a>
           <a
             className="text-gray-700 transition-colors duration-300 transform lg:mx-8 dark:text-gray-200 dark:hover:text-blue-400 hover:text-blue-500"
-            href="#"
+            href="/contact"
           >
             Contact
           </a>
