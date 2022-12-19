@@ -13,6 +13,13 @@ const unityConfig = {
 const Home = () => {
   const { address } = useWallet();
   const unityContext = useUnityContext(unityConfig);
+  const { isLoaded, sendMessage } = unityContext;
+
+  useEffect(() => {
+    if (isLoaded && address) {
+      sendMessage('GFT', 'WalletConnected', address);
+    }
+  }, [isLoaded, sendMessage, address]);
 
   // Event Listener for starting game
   const onStartGame = useCallback(() => {
