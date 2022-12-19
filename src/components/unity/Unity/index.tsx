@@ -1,6 +1,7 @@
-import { CSSProperties, useEffect } from 'react';
-import { Unity, UnityConfig, useUnityContext } from 'react-unity-webgl';
+import { CSSProperties } from 'react';
+import { Unity } from 'react-unity-webgl';
 import { UnityContextHook } from 'react-unity-webgl/distribution/types/unity-context-hook';
+import { UnityProvider } from 'react-unity-webgl/distribution/types/unity-provider';
 import styled from 'styled-components';
 
 const UnityContainer = styled.div`
@@ -29,40 +30,21 @@ export type UnityEventListener = {
 };
 
 type UnityProps = {
-  unityConfig: UnityConfig;
-  setUnityContext?: (unityContext: UnityContext) => void;
-  eventListeners?: UnityEventListener[];
+  unityProvider: UnityProvider;
+  isLoaded: boolean;
+  loadingProgression: number;
   styles?: CSSProperties;
 };
 
 const UnityWrapper = ({
-  unityConfig,
-  setUnityContext,
-  eventListeners,
+  unityProvider,
+  isLoaded,
+  loadingProgression,
   styles,
 }: UnityProps) => {
-  const unityContext = useUnityContext(unityConfig);
-  const { loadingProgression, isLoaded } = unityContext;
-
-  useEffect(() => {
-    setUnityContext && setUnityContext(unityContext);
-  }, [unityContext, setUnityContext]);
-
-  useEffect(() => {
-    const { addEventListener, removeEventListener } = unityContext;
-    eventListeners?.forEach((event: UnityEventListener) => {
-      addEventListener(event.eventName, event.callback);
-    });
-    return () => {
-      eventListeners?.forEach((event: UnityEventListener) => {
-        removeEventListener(event.eventName, event.callback);
-      });
-    };
-  }, [unityContext, eventListeners]);
-
   return (
     <UnityContainer>
-      <Unity unityProvider={unityContext.unityProvider} style={styles} />
+      <Unity unityProvider={unityProvider} style={styles} />
       {!isLoaded && loadingProgression > 0 && (
         <Loader>
           <div>Loading... {Math.round(loadingProgression * 100)}%</div>

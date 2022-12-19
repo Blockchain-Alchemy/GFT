@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import Unity, {
-  UnityContext,
-  UnityEventListener,
-} from 'components/unity/Unity';
+import { useUnityContext } from 'react-unity-webgl';
 import { useWallet } from 'contexts/WalletProvider';
+import Unity, { UnityEventListener } from 'components/unity/Unity';
 
 const unityConfig = {
   loaderUrl: 'Build/public.loader.js',
@@ -14,15 +12,8 @@ const unityConfig = {
 
 const Home = () => {
   const { address } = useWallet();
-  const [unityContext, setUnityContext] = useState<UnityContext | null>(null);
-  console.log('unityContext', unityContext);
-
-  // Send wallet connected state to unity.
-  useEffect(() => {
-    if (unityContext) {
-      unityContext.sendMessage('GameManager', 'WalletConnected', !!address);
-    }
-  }, [unityContext, address]);
+  const unityContext = useUnityContext(unityConfig);
+  const { isLoaded, loadingProgression } = unityContext;
 
   // Event Listener for starting game
   const onStartGame = useCallback(() => {
@@ -41,12 +32,24 @@ const Home = () => {
     ];
   }, [onStartGame, onEndGame]);
 
+  useEffect(() => {
+    const { addEventListener, removeEventListener } = unityContext;
+    eventListeners?.forEach((event: UnityEventListener) => {
+      addEventListener(event.eventName, event.callback);
+    });
+    return () => {
+      eventListeners?.forEach((event: UnityEventListener) => {
+        removeEventListener(event.eventName, event.callback);
+      });
+    };
+  }, [unityContext, eventListeners]);
+
   return (
     <div className="container mx-auto mt-4">
       <Unity
-        unityConfig={unityConfig}
-        eventListeners={eventListeners}
-        setUnityContext={setUnityContext}
+        unityProvider={unityContext.unityProvider}
+        isLoaded={isLoaded}
+        loadingProgression={loadingProgression}
         styles={{
           height: 540,
           width: 950,
