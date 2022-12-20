@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useUnityContext } from 'react-unity-webgl';
 import { useWallet } from 'contexts/WalletProvider';
+import useToken from 'hooks/useToken';
 import Unity, { UnityEventListener } from 'components/unity/Unity';
 
 const unityConfig = {
@@ -12,14 +13,20 @@ const unityConfig = {
 
 const Home = () => {
   const { address } = useWallet();
+  const { getGateToken } = useToken();
   const unityContext = useUnityContext(unityConfig);
   const { isLoaded, sendMessage } = unityContext;
 
   useEffect(() => {
-    if (isLoaded && address) {
-      sendMessage('GFT', 'WalletConnected', address);
-    }
-  }, [isLoaded, sendMessage, address]);
+    (async () => {
+      if (isLoaded && address) {
+        sendMessage('GFT', 'WalletConnected', address);
+
+        const tokens = await getGateToken(address);
+        tokens && sendMessage('GFT', 'TokenFound', 'EntryCoin');
+      }
+    })();
+  }, [isLoaded, sendMessage, address, getGateToken]);
 
   // Event Listener for starting game
   const onStartGame = useCallback(() => {

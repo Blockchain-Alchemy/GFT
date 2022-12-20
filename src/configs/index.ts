@@ -6,7 +6,7 @@ type NetworkConfig = {
 
 export const Networks: NetworkConfig = {
   [NetworkType.MAINNET]: {
-    RpcUrl: 'https://mainnet.tezos.marigold.dev',
+    RpcUrl: 'https://mainnet.api.tez.ie',
     UUSD: 'KT1XRPEPXbZK25r3Htzp2o1x7xdMMmfocKNW',
   },
   [NetworkType.JAKARTANET]: {

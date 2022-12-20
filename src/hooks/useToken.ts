@@ -4,17 +4,18 @@ import { useWallet } from 'contexts/WalletProvider';
 const useToken = () => {
   const { tezos } = useWallet();
 
-  const findToken = useCallback(
+  const getGateToken = useCallback(
     async (address: string) => {
       try {
-        const contract = await tezos.wallet.at('contrat_address');
+        const contract = await tezos.contract.at(
+          'KT1SGdop74rGobKAETcBPnz9yQkH38hZnpBh'
+        );
         const storage: any = await contract.storage();
-        const key = {
-          owner: address,
-          token_id: 0,
-        };
-        const operators = await storage.operators.get(key);
-        return !!operators;
+        const values = await storage.ledger.get({
+          0: address,
+          1: 1,
+        });
+        return values.toNumber();
       } catch (error) {
         console.error(error);
       }
@@ -22,7 +23,7 @@ const useToken = () => {
     [tezos]
   );
 
-  return { findToken };
+  return { getGateToken };
 };
 
 export default useToken;
