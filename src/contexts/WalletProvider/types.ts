@@ -1,4 +1,4 @@
-import { NetworkType, PermissionResponseOutput } from '@airgap/beacon-sdk';
+import { PermissionResponseOutput } from '@airgap/beacon-sdk';
 import { BeaconWallet } from '@taquito/beacon-wallet';
 import { TezosToolkit } from '@taquito/taquito';
 
