@@ -48,7 +48,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({
       }
 
       const _wallet = new BeaconWallet({
-        name: 'Escrow Demo',
+        name: 'GFT',
         preferredNetwork: networkType,
         disableDefaultEvents: true, // Disable all events / UI. This also disables the pairing alert.
         eventHandlers: {
@@ -62,6 +62,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({
         },
       });
 
+      console.log('setWalletProvider', _wallet);
       tezos.setWalletProvider(_wallet);
       setWallet(_wallet);
     })();

@@ -15,7 +15,7 @@ const useToken = () => {
           0: address,
           1: 1,
         });
-        return values.toNumber();
+        return values ? values.toNumber() : 0;
       } catch (error) {
         console.error(error);
       }
