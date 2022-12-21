@@ -22,11 +22,14 @@ const Play = () => {
   useEffect(() => {
     (async () => {
       if (isLoaded && address) {
+        // Send wallet connected state.
         sendMessage('GFT', 'WalletConnected', address);
 
+        // Check gate token
         const tokens = await getGateToken(address);
         tokens && sendMessage('GFT', 'TokenFound', 'EntryCoin');
 
+        // Get Market Items.
         const items = await getMarketItems(address);
         console.log('items', items);
         if (items) {

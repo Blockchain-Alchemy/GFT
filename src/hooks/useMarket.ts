@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useWallet } from 'contexts/WalletProvider';
 
 export type MarketItem = {
