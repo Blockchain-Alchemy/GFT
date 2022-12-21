@@ -60,12 +60,21 @@ const Play = () => {
     console.log('End');
   }, []);
 
+  // Event Listener for transaction
+  const onSendTransaction = useCallback((params: String) => {
+    console.log('onSendTransaction', params);
+    setTimeout(() => {
+      sendMessage('GFT', 'TransactionResult', "Success");
+    }, 1000)
+  }, [sendMessage]);
+
   const eventListeners = useMemo((): UnityEventListener[] => {
     return [
       { eventName: 'StartGame', callback: onStartGame },
       { eventName: 'EndGame', callback: onEndGame },
+      { eventName: 'SendTransaction', callback: onSendTransaction },
     ];
-  }, [onStartGame, onEndGame]);
+  }, [onStartGame, onEndGame, onSendTransaction]);
 
   return (
     <div className="container mx-auto mt-4">
