@@ -15,6 +15,22 @@ const useMarket = () => {
     async (items: MarketItem[]) => {
       try {
         const contract = await tezos.wallet.at(
+          Networks.
+        );
+        const op = await contract.methods.token(items).send();
+        const tx = await op.confirmation(1);
+        return tx;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [tezos]
+  );
+
+  const buyMarketItems = useCallback(
+    async (items: MarketItem[]) => {
+      try {
+        const contract = await tezos.wallet.at(
           'KT1V2tXEnb43yxxeb93N8E3ho6kVeTbsmVwC'
         );
         const op = await contract.methods.token(items).send();
@@ -52,7 +68,7 @@ const useMarket = () => {
     [tezos]
   );
 
-  return { addMarketItems, getMarketItems };
+  return { addMarketItems, buyMarketItems, getMarketItems };
 };
 
 export default useMarket;
