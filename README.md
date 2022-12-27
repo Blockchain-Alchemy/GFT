@@ -2,10 +2,8 @@
 [![](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
 
 ### Summary
-
-This is a robust, flexible and scalable solution that allows game devlopers to take full advantage of the Tezos Blockchain.
 ![2022-12-27 01 19 52](https://user-images.githubusercontent.com/2120817/209650739-62a342eb-3da7-4c4a-b231-2a6326a4cb24.gif)
-
+This is a robust, flexible and scalable solution that allows game devlopers to take full advantage of the Tezos Blockchain.
 
 # Setup
 **GFT** runs on [**node**](https://nodejs.org/en/) and [**Unity LTS version 2020.3**](https://unity.com/releases/editor/qa/lts-releases?version=2020.3). 
