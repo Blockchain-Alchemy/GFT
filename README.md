@@ -20,6 +20,8 @@ Unity project should be built as WebGL and named `public` - the output `/Build/`
 
 This repo contains an example Unity WebGL Component already built and placed in the `/public/Build/` folder, it shows the basic functionality.
 
+For more information, please see the https://github.com/jeffreylanters/react-unity-webgl
+
 ### Build from node
 To create an optimized build that can be deployed, in terminal enter:
 
