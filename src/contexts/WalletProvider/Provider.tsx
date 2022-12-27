@@ -27,8 +27,8 @@ const scopes: PermissionScope[] = [
 export const WalletProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { networkType, rpcUrl } = useNetwork();
-  const [tezos, setTezos] = useState(new TezosToolkit(rpcUrl));
+  const { networkType, config } = useNetwork();
+  const [tezos, setTezos] = useState(new TezosToolkit(config.RpcUrl));
   const [wallet, setWallet] = useState<BeaconWallet>();
   const [publicKey, setPublicKey] = useState<string | undefined>(undefined);
   const [address, setAddress] = useState<string | undefined>(undefined);
@@ -37,8 +37,8 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     setAddress(undefined);
     setConnected(false);
-    setTezos(new TezosToolkit(rpcUrl));
-  }, [rpcUrl]);
+    setTezos(new TezosToolkit(config.RpcUrl));
+  }, [config]);
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -73,11 +73,11 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({
       return Promise.resolve(undefined);
     }
     try {
-      console.log('Request Permission', networkType, rpcUrl);
+      console.log('Request Permission', networkType, config.RpcUrl);
       const permissions = await wallet.client.requestPermissions({
         network: {
           type: networkType,
-          rpcUrl: rpcUrl,
+          rpcUrl: config.RpcUrl,
         },
         scopes,
       });
@@ -93,7 +93,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({
     } catch (error) {
       setConnected(false);
     }
-  }, [wallet, networkType, rpcUrl]);
+  }, [wallet, networkType, config]);
 
   const disconnectWallet = useCallback(async () => {
     setConnected(false);
