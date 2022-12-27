@@ -1,7 +1,8 @@
 import { NetworkType } from '@airgap/beacon-sdk';
+import { NetworkConfig } from 'configs';
 
 export interface NetworkContextApi {
   networkType: NetworkType;
-  rpcUrl: string;
+  config: NetworkConfig;
   setNetworkType: (networkType: NetworkType) => void;
 }

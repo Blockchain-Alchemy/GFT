@@ -7,7 +7,7 @@ export type NetworkConfig = {
 };
 
 type ConfigMap = {
-  [key in NetworkType]?: any;
+  [key in NetworkType]?: NetworkConfig;
 };
 
 export const Networks: ConfigMap = {

@@ -14,18 +14,18 @@ type Props = {
 
 export const NetworkProvider: React.FC<Props> = ({ value, children }) => {
   const [networkType, setNetworkType] = useState(value);
-  const [rpcUrl, setRpcUrl] = useState(Networks[value].RpcList);
+  const [config, setConfig] = useState(Networks[value]!);
 
   useEffect(() => {
-    const network = Networks[networkType];
-    setRpcUrl(network.RpcUrl);
+    const config = Networks[networkType]!;
+    setConfig(config);
   }, [networkType]);
 
   return (
     <NetworkContext.Provider
       value={{
-        rpcUrl,
         networkType,
+        config,
         setNetworkType,
       }}
     >
