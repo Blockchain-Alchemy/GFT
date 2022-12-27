@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
+import toast from 'react-hot-toast';
 import { useWallet } from 'contexts/WalletProvider';
 import { useUnityContext } from 'contexts/UnityProvider';
 import Unity, { UnityEventListener } from 'components/unity/Unity';
@@ -31,7 +32,7 @@ const Play = () => {
 
         // Get Market Items.
         const items = await getMarketItems(address);
-        console.log('items', items);
+        console.log('Market Items', items);
         if (items) {
           const values = {
             time_stamp: new Date().getTime(),
@@ -61,11 +62,29 @@ const Play = () => {
   }, []);
 
   // Event Listener for transaction
-  const onSendTransaction = useCallback(async (params: String) => {
-    console.log('onSendTransaction', params);
-    //await buyMarketItems(params);
-    sendMessage('GFT', 'TransactionResult', "Success");
-  }, [buyMarketItems, sendMessage]);
+  const onSendTransaction = useCallback(
+    async (params: any) => {
+      console.log('onSendTransaction', params);
+      const items: any[] = [
+        {
+          token_id: 1,
+          price: 3,
+          amount: 5,
+        },
+        {
+          token_id: 2,
+          price: 4,
+          amount: 8,
+        },
+      ];
+      const tx = await buyMarketItems(items);
+      if (tx) {
+        sendMessage('GFT', 'TransactionResult', 'Success');
+        toast.success('Transaction Success');
+      }
+    },
+    [buyMarketItems, sendMessage]
+  );
 
   const eventListeners = useMemo((): UnityEventListener[] => {
     return [
@@ -106,6 +125,6 @@ export default Play;
         amount: 8,
       },
     ];
-    await addItem(items);
+    await addMarketItems(items);
   }
-}, [address, addItem]);*/
+}, [address, addMarketItems]);*/

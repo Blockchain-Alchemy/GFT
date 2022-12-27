@@ -16,7 +16,7 @@ const useMarket = () => {
   const addMarketItems = useCallback(
     async (items: MarketItem[]) => {
       try {
-        const contract = await tezos.wallet.at(config.RpcUrl);
+        const contract = await tezos.wallet.at(config.Market);
         const op = await contract.methods.add_items(items).send();
         const tx = await op.confirmation(1);
         return tx;
@@ -30,7 +30,7 @@ const useMarket = () => {
   const buyMarketItems = useCallback(
     async (items: MarketItem[]) => {
       try {
-        const contract = await tezos.wallet.at(config.RpcUrl);
+        const contract = await tezos.wallet.at(config.Market);
         const op = await contract.methods.buy_items(items).send();
         const tx = await op.confirmation(1);
         return tx;
@@ -44,7 +44,7 @@ const useMarket = () => {
   const getMarketItems = useCallback(
     async (address: string): Promise<MarketItem[] | undefined> => {
       try {
-        const contract = await tezos.contract.at(config.RpcUrl);
+        const contract = await tezos.contract.at(config.Market);
         const storage: any = await contract.storage();
         return storage.items
           .filter((i) => i.owner === address)
