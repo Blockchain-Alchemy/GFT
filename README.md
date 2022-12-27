@@ -39,8 +39,6 @@ You can now simpley drag-and-drop the `build` folder to deploy to [netlify](http
 This article gives a step-by-step, comprehesive walkthrough of all the functions and components of GFT! 
 [<img width="700" alt="Screen Shot 2022-12-27 at 2 14 08 AM" src="https://user-images.githubusercontent.com/2120817/209651265-1244b4c6-aae0-416d-8ef4-bc0ce0d5d464.png">](https://medium.com/@Dreitser/gtf-gaming-framework-for-tezos-b69d37cca891)
 
-[**GFT Tutorials**](https://blockchain-alchemy.gitbook.io/gft-gaming-framework-for-tezos/)
-
 # Dependencies
 **GFT** runs on [**node**](https://nodejs.org/en/) and [**Unity LTS version 2020.3**](https://unity.com/releases/editor/qa/lts-releases?version=2020.3). 
 
