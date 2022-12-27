@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useWallet } from 'contexts/WalletProvider';
+import { useNetwork } from 'contexts/NetworkProvider';
 
 export type MarketItem = {
   owner: string;
@@ -9,47 +10,41 @@ export type MarketItem = {
 };
 
 const useMarket = () => {
+  const { config } = useNetwork();
   const { tezos } = useWallet();
 
   const addMarketItems = useCallback(
     async (items: MarketItem[]) => {
       try {
-        const contract = await tezos.wallet.at(
-          Networks.
-        );
-        const op = await contract.methods.token(items).send();
+        const contract = await tezos.wallet.at(config.RpcUrl);
+        const op = await contract.methods.add_items(items).send();
         const tx = await op.confirmation(1);
         return tx;
       } catch (error) {
         console.error(error);
       }
     },
-    [tezos]
+    [tezos, config]
   );
 
   const buyMarketItems = useCallback(
     async (items: MarketItem[]) => {
       try {
-        const contract = await tezos.wallet.at(
-          'KT1V2tXEnb43yxxeb93N8E3ho6kVeTbsmVwC'
-        );
-        const op = await contract.methods.token(items).send();
+        const contract = await tezos.wallet.at(config.RpcUrl);
+        const op = await contract.methods.buy_items(items).send();
         const tx = await op.confirmation(1);
         return tx;
       } catch (error) {
         console.error(error);
       }
     },
-    [tezos]
+    [tezos, config]
   );
 
   const getMarketItems = useCallback(
     async (address: string): Promise<MarketItem[] | undefined> => {
       try {
-        const contract = await tezos.contract.at(
-          'KT1V2tXEnb43yxxeb93N8E3ho6kVeTbsmVwC'
-        );
-
+        const contract = await tezos.contract.at(config.RpcUrl);
         const storage: any = await contract.storage();
         return storage.items
           .filter((i) => i.owner === address)
@@ -65,7 +60,7 @@ const useMarket = () => {
         console.error(error);
       }
     },
-    [tezos]
+    [tezos, config]
   );
 
   return { addMarketItems, buyMarketItems, getMarketItems };
