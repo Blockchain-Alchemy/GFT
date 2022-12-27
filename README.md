@@ -38,6 +38,7 @@ This article gives a step-by-step, comprehesive walkthrough of all the functions
 
 [**GFT Tutorials**](https://blockchain-alchemy.gitbook.io/gft-gaming-framework-for-tezos/)
 
-![WWXTZ Chart](https://user-images.githubusercontent.com/2120817/208210672-6b6dc30d-625d-4ee5-90c7-6221471f652b.jpg)
-
 # Dependencies
+**GFT** runs on [**node**](https://nodejs.org/en/) and [**Unity LTS version 2020.3**](https://unity.com/releases/editor/qa/lts-releases?version=2020.3). 
+
+
