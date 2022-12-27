@@ -15,7 +15,7 @@ const MarketItemNames = {
 const Play = () => {
   const { address } = useWallet();
   const { getGateToken } = useToken();
-  const { getMarketItems } = useMarket();
+  const { getMarketItems, buyMarketItems } = useMarket();
   const { unityContext } = useUnityContext();
   const { isLoaded, sendMessage } = unityContext;
 
@@ -61,12 +61,11 @@ const Play = () => {
   }, []);
 
   // Event Listener for transaction
-  const onSendTransaction = useCallback((params: String) => {
+  const onSendTransaction = useCallback(async (params: String) => {
     console.log('onSendTransaction', params);
-    setTimeout(() => {
-      sendMessage('GFT', 'TransactionResult', "Success");
-    }, 1000)
-  }, [sendMessage]);
+    //await buyMarketItems(params);
+    sendMessage('GFT', 'TransactionResult', "Success");
+  }, [buyMarketItems, sendMessage]);
 
   const eventListeners = useMemo((): UnityEventListener[] => {
     return [
