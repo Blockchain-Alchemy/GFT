@@ -5,7 +5,7 @@ import { useUnityContext } from 'contexts/UnityProvider';
 import Unity, { UnityEventListener } from 'components/unity/Unity';
 import useToken from 'hooks/useToken';
 import useMarket from 'hooks/useMarket';
-import * as indexer from 'services/indexer';
+// import * as indexer from 'services/indexer';
 
 const MarketItemNames = {
   1: 'Ammo',
