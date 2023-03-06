@@ -5,6 +5,7 @@ import { useUnityContext } from 'contexts/UnityProvider';
 import Unity, { UnityEventListener } from 'components/unity/Unity';
 import useToken from 'hooks/useToken';
 import useMarket from 'hooks/useMarket';
+import * as indexer from 'services/indexer';
 
 const MarketItemNames = {
   1: 'Ammo',
@@ -29,6 +30,11 @@ const Play = () => {
         // Check gate token
         const tokens = await getGateToken(address);
         tokens && sendMessage('GFT', 'TokenFound', 'EntryCoin');
+        tokens && sendMessage('GFT', 'TokenFound', 'EntryCoin');
+        // const token = await indexer.getEntryCoin(address);
+        // const entryCoinAmount = token ? token.value : 0;
+        // console.log('entryCoinAmount', entryCoinAmount);
+        // entryCoinAmount && sendMessage('GFT', 'TokenFound', 'EntryCoin');
 
         // Get Market Items.
         const items = await getMarketItems(address);
@@ -86,13 +92,45 @@ const Play = () => {
     [buyMarketItems, sendMessage]
   );
 
+  const onSendNotification = useCallback((params: string) => {
+    const msg = JSON.parse(params);
+    toast.success(msg.message);
+  }, []);
+
+  /*const onMintItem = useCallback(
+    async (params: any) => {
+      console.log('onMintItem', address, params);
+      if (address) {
+        const payload = {
+          induction_time: 1,
+          kairos: 2,
+          cave: 3,
+          manifold: 4,
+          perception: 5,
+          perception_time: 6,
+          falling_chamber: 3,
+          minter: address,
+        };
+        const result = await indexer.mint(payload);
+        console.log('Mint-Result', result);
+
+        if (result) {
+          sendMessage('GFT', 'MintComplete', entryCoinAmount);
+          toast.success('Transaction Success');
+        }
+      }
+    },
+    [address, sendMessage]
+  );*/
+
   const eventListeners = useMemo((): UnityEventListener[] => {
     return [
       { eventName: 'StartGame', callback: onStartGame },
       { eventName: 'EndGame', callback: onEndGame },
       { eventName: 'SendTransaction', callback: onSendTransaction },
+      { eventName: 'SendNotification', callback: onSendNotification },
     ];
-  }, [onStartGame, onEndGame, onSendTransaction]);
+  }, [onStartGame, onEndGame, onSendTransaction, onSendNotification]);
 
   return (
     <div className="container mx-auto mt-4">
